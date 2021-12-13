@@ -1,62 +1,52 @@
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 
-const baseUrl: string = 'http://localhost:4000'
+const baseUrl: string = 'https://619a6e572782760017445234.mockapi.io/'
 
-export const getTodos = async (): Promise<AxiosResponse<ApiDataType>> => {
+export const getTodos = async () => {
   try {
-    const todos: AxiosResponse<ApiDataType> = await axios.get(
-      baseUrl + '/todos'
+    return await axios.get(
+        baseUrl + '/todos'
     )
-    return todos
   } catch (error) {
     throw new Error(error)
   }
 }
 
-export const addTodo = async (
-  formData: ITodo
-): Promise<AxiosResponse<ApiDataType>> => {
+export const addTodo = async (formData: Todo) => {
   try {
-    const todo: Omit<ITodo, '_id'> = {
-      name: formData.name,
+    const todo: Omit<Todo, 'id'> = {
+      title: formData.title,
       description: formData.description,
-      status: false,
+      completed: false,
     }
-    const saveTodo: AxiosResponse<ApiDataType> = await axios.post(
-      baseUrl + '/add-todo',
-      todo
+    return await axios.post(
+        baseUrl + '/todos',
+        todo
     )
-    return saveTodo
   } catch (error) {
     throw new Error(error)
   }
 }
 
-export const updateTodo = async (
-  todo: ITodo
-): Promise<AxiosResponse<ApiDataType>> => {
+export const updateTodo = async (todo: Todo) => {
   try {
-    const todoUpdate: Pick<ITodo, 'status'> = {
-      status: true,
+    const todoUpdate: Pick<Todo, 'completed'> = {
+      completed: true,
     }
-    const updatedTodo: AxiosResponse<ApiDataType> = await axios.put(
-      `${baseUrl}/edit-todo/${todo._id}`,
-      todoUpdate
+    return await axios.put(
+        `${baseUrl}/todos/${todo.id}`,
+        todoUpdate
     )
-    return updatedTodo
   } catch (error) {
     throw new Error(error)
   }
 }
 
-export const deleteTodo = async (
-  _id: string
-): Promise<AxiosResponse<ApiDataType>> => {
+export const deleteTodo = async (id: string)=> {
   try {
-    const deletedTodo: AxiosResponse<ApiDataType> = await axios.delete(
-      `${baseUrl}/delete-todo/${_id}`
+    return await axios.delete(
+        `${baseUrl}/todos/${id}`
     )
-    return deletedTodo
   } catch (error) {
     throw new Error(error)
   }

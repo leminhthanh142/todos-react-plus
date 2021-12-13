@@ -1,20 +1,15 @@
-interface ITodo {
-    _id: string
-    name: string
+interface Todo {
+    id: string
+    title: string
     description: string
-    status: boolean
-    createdAt?: string
-    updatedAt?: string
+    completed: boolean
+    createdAt?: Date
 }
 
 type TodoProps = {
-    todo: ITodo
+    todo: Todo
 }
 
 type ApiDataType = {
-    message: string
-    status: string
-    todos: ITodo[]
-    todo?: ITodo
-  }
-  
+    data: Todo[]
+}

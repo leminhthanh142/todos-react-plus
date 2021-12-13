@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 
 type Props = {
-  saveTodo: (e: React.FormEvent, formData: ITodo | any) => void
+  saveTodo: (e: React.FormEvent, formData: Todo | any) => void
 }
 
 const AddTodo: React.FC<Props> = ({ saveTodo }) => {
-  const [formData, setFormData] = useState<ITodo | {}>()
+  const [formData, setFormData] = useState<Todo | {}>()
 
   const handleForm = (e: React.FormEvent<HTMLInputElement>): void => {
     setFormData({
@@ -19,7 +19,7 @@ const AddTodo: React.FC<Props> = ({ saveTodo }) => {
       <div>
         <div>
           <label htmlFor='name'>Name</label>
-          <input onChange={handleForm} type='text' id='name' />
+          <input onChange={handleForm} type='text' id='title' />
         </div>
         <div>
           <label htmlFor='description'>Description</label>
